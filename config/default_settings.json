@@ -1,0 +1,9 @@
+{
+	"vlc": {
+		"binary" : "vlc",
+		"port" : 3000
+	},
+	"webservice": {
+		"port" : 80
+	}
+}

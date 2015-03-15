@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8" />
+		<title>Remote Control</title>
+		<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
+		<style type="text/css">
+
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1>This is the remote, the best remote, the greatest</h1>
+
+			<ul class="list-group">
+				<% files.forEach(function(file) { %>
+					<li class="list-group-item">
+					<button class="play btn btn-sm btn-primary"><i class="glyphicon glyphicon-play"></i></button>
+					<button class="enqueue btn btn-sm btn-default"><i class="glyphicon glyphicon-tasks"></i></button>
+					<span class="file-location"><%= file %></span>
+				</li>
+				<% }) %>
+			</ul>
+			<form method="POST" action="/add-folder/" class="form-horizontal">
+				<div class="input-group">
+        				<input type="text" id="folder" name="folder" class="form-control" placeholder="C:\Users\Tich\Videos"/>
+						<span class="input-group-btn">
+							<button class="btn btn-primary" type="submit">Add Folder</button>
+						</span>
+        			</div>
+			</form>
+		</div>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+		<script src="https://cdn.socket.io/socket.io-1.2.1.js"></script>
+
+		<script type="text/javascript">
+			$(document).ready(function(){
+				var socket = io(":8080");
+
+				socket.on('message', function(data){
+  					
+  				});
+
+				$(".play").on("click", function(event){
+					var filename = $(this).parent().children(".file-location").text();
+					
+					socket.emit("add", { file: filename });
+				});
+
+				$(".enqueue").on("click", function(event){
+					var filename = $(this).parent().children(".file-location").text();
+					
+					socket.emit("enqueue", { file: filename });
+				});
+			});
+		</script>
+	</body>
+</html>

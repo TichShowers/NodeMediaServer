@@ -1,0 +1,15 @@
+{
+	"vlc": {
+		"binary" : "C:\\Program Files (x86)\\VideoLAN\\VLC\\vlc.exe",
+		"port" : 3000
+	},
+	"webservice": {
+		"port" : 8080
+	},
+	"database" : {
+		"name" : "database.db"
+	},
+	"files": {
+		"extensions": [".avi", ".mov", ".mp4", ".xvid", ".mpeg", ".3g2", ".3gp", ".asf", ".asx", ".dvdmedia", ".flv", ".m2p", ".m4v", ".mkv", ".mod", ".mpg", ".mts", ".ogm"]
+	}
+}
