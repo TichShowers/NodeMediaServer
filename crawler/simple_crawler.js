@@ -7,7 +7,6 @@ var settings = require("../settings");
 var extensions = settings.files.extensions;
 
 var crawlFolder = function(folder, callback) {
-	console.log(path);
 	if(path.isAbsolute(folder)) {
 		fs.exists(folder, function() {
 			datastore.addFolder(folder, function(error){
@@ -39,7 +38,7 @@ var splitFilesFromDirectory = function(folder, callback) {
 			var stats = fs.lstatSync(path.join(folder, list[i]));
 			if(stats.isFile() && isAllowedExtension(path.join(folder, list[i])))
 			{
-				files.push(list[i]);		
+				files.push(list[i]);
 			}
 			if(stats.isDirectory())
 			{
@@ -49,6 +48,7 @@ var splitFilesFromDirectory = function(folder, callback) {
 
 		callback(files, folders);
 	});
-}
+};
 
 module.exports.crawlFolder = crawlFolder;
+module.exports.splitFilesFromDirectory = splitFilesFromDirectory;

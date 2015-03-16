@@ -9,6 +9,7 @@ var active = false;
 var looping = false;
 var repeating = false;
 var shuffling = false;
+var isPlaying = false;
 
 var createPlayer = function(file){
   var player = spawn(settings.vlc.binary, ['-I rc --rc-host=\"localhost:' + settings.vlc.port + '\" --rc-quiet','--fullscreen', '--play-and-exit', '--no-loop', file]);
@@ -42,6 +43,8 @@ var stop = function() { if(active) client.write("stop\n"); };
 var clearPlaylist = function() { if(active) client.write("clear\n"); };
 var printPlaylist = function() { if(active) client.write("playlist\n"); };
 var printHelp = function() { if(active) client.write("help\n"); };
+
+var exit = function() {if(active) client.write("add vlc://quit\n");};
 
 var enableLooping = function() {
   if(active) { client.write("loop on\n"); looping = true; }
@@ -106,3 +109,12 @@ var startPlaylist = function(file) {
 
 module.exports.start = start;
 module.exports.startPlaylist = startPlaylist;
+
+module.exports.play = play;
+module.exports.pause = pause;
+module.exports.next = next;
+module.exports.previous = previous;
+module.exports.stop = stop;
+module.exports.exit = exit;
+
+module.exports.isPlaying = function() { return isPlaying; };

@@ -13,6 +13,17 @@
 		<div class="container">
 			<h1>This is the remote, the best remote, the greatest</h1>
 
+			<div id="controls">
+				<h2>Controls</h2>
+
+				<a href="/player-controls/play" class="btn btn-lg btn-primary"><i class="glyphicon glyphicon-play"></i></a>
+				<a href="/player-controls/pause" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-pause"></i></a>
+				<a href="/player-controls/previous" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-fast-backward"></i></a>
+				<a href="/player-controls/stop" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-stop"></i></a>
+				<a href="/player-controls/next" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-fast-forward"></i></a>
+				<a href="/player-controls/exit" class="btn btn-lg btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+			</div>
+
 			<ul class="list-group">
 				<% files.forEach(function(file) { %>
 					<li class="list-group-item">
@@ -54,7 +65,26 @@
 					
 					socket.emit("enqueue", { file: filename });
 				});
+
+				$("#controls a").on('click', formSubmit);;
 			});
+
+			var formSubmit = function (e) {
+			    e.preventDefault();
+			    var $this = $(this);
+
+			    $.ajax({
+		            url: $this.attr('href'),
+		            type: 'POST',
+		            data: { },
+		            success: function(response) {
+		                console.log("success");
+		            },
+		            error: function(response) {
+		                console.log("An error occured while calling AJAX.");
+		            }
+		        });
+			};
 		</script>
 	</body>
 </html>
