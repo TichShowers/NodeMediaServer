@@ -9,8 +9,8 @@ var engine = require('ejs-locals');
 var app = express();
 
 var fs = require('fs');
-var player = require("./videoplayer.js");
-var settings = require("./settings.js");
+var player = require("./videoplayer");
+var settings = require("./settings");
 
 // view engine setup
 
@@ -65,7 +65,7 @@ var server = app.listen(settings.webservice.port, function() {
   console.log('Express server listening on port ' + server.address().port);
 });
 
-var io = require('socket.io').listen(server);
+/*var io = require('socket.io').listen(server);
 
 io.sockets.on('connection', function (socket) {
 
@@ -76,6 +76,6 @@ io.sockets.on('connection', function (socket) {
     socket.on('enqueue', function (data) {
        player.startPlaylist(data.file);
     });
-});
+});*/
 
 module.exports = app;

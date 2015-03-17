@@ -27,9 +27,9 @@
 			<ul class="list-group">
 				<% files.forEach(function(file) { %>
 					<li class="list-group-item">
-					<button class="play btn btn-sm btn-primary"><i class="glyphicon glyphicon-play"></i></button>
-					<button class="enqueue btn btn-sm btn-default"><i class="glyphicon glyphicon-tasks"></i></button>
-					<span class="file-location"><%= file %></span>
+					<a href="/player-controls/start/<%= file.id %>" class="play btn btn-sm btn-primary"><i class="glyphicon glyphicon-play"></i></a>
+					<a href="/player-controls/enqueue/<%= file.id %>" class="enqueue btn btn-sm btn-default"><i class="glyphicon glyphicon-tasks"></i></a>
+					<span class="file-location"><%= file.name %></span>
 				</li>
 				<% }) %>
 			</ul>
@@ -48,35 +48,22 @@
 
 		<script type="text/javascript">
 			$(document).ready(function(){
-				var socket = io(":8080");
 
-				socket.on('message', function(data){
-  					
-  				});
-
-				$(".play").on("click", function(event){
-					var filename = $(this).parent().children(".file-location").text();
-					
-					socket.emit("add", { file: filename });
-				});
-
-				$(".enqueue").on("click", function(event){
-					var filename = $(this).parent().children(".file-location").text();
-					
-					socket.emit("enqueue", { file: filename });
-				});
-
-				$("#controls a").on('click', formSubmit);;
+				$("a").on('click', linkHandler);;
 			});
 
-			var formSubmit = function (e) {
+			var linkHandler = function (e) {
 			    e.preventDefault();
-			    var $this = $(this);
+			    var href = $(this).attr('href');
+			    
+			    ajaxSend(href, {});
+			};
 
-			    $.ajax({
-		            url: $this.attr('href'),
+			var ajaxSend = function(url, data) {
+				$.ajax({
+		            url: url,
 		            type: 'POST',
-		            data: { },
+		            data: data,
 		            success: function(response) {
 		                console.log("success");
 		            },
@@ -84,7 +71,7 @@
 		                console.log("An error occured while calling AJAX.");
 		            }
 		        });
-			};
+			}
 		</script>
 	</body>
 </html>

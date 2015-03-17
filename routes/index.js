@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+var path = require("path")
+
 var datastore = require("../db/datastore");
 var crawler = require("../crawler/simple_crawler");
 
@@ -15,13 +17,7 @@ router.get('/', function(request, response) {
 		}
 		else
 		{
-			var files = [];
-
-			result.forEach(function(entry){
-				files.push(entry.location + entry.name);
-			});
-
-			response.render('index', { files : files });
+			response.render('index', { files : result });
 		}
 	});
 });

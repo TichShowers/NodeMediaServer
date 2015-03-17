@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var player = require("../videoplayer");
+var datastore = require("../db/datastore");
 
 router.post('/play', function(request, response){
 	player.play();
@@ -36,6 +37,24 @@ router.post('/previous', function(request, response){
 router.post('/exit', function(request, response){
 	player.exit();
 	doResponse(response);
+});
+
+router.post('/enqueue/:id', function(request, response){
+	var id = request.params.id;
+
+	datastore.getFilePath(id, function(error, file) {
+		player.startPlaylist(file);
+		doResponse(response);
+	});
+});
+
+router.post('/start/:id', function(request, response){
+	var id = request.params.id;
+
+	datastore.getFilePath(id, function(error, file) {
+		player.start(file);
+		doResponse(response);
+	});
 });
 
 var doResponse = function(response) {
