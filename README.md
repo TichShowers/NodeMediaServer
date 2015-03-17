@@ -6,7 +6,7 @@ NodeJS application to manage media library and start VLC Media player from a rem
 * [NodeJS](https://nodejs.org/) v0.12 or up
 * [VLC Media Player](https://www.videolan.org/vlc/index.html) v2.X or up
 
-## installation
+## Installation
 
 Before you run the application for the first time, check if your node version is correct (`node --version`). If you have the correct version make sure to run `npm install` command in the directory of the file app.js. This should install dependencies automatically.
 
