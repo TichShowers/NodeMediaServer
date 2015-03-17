@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-var path = require("path")
-
 var datastore = require("../db/datastore");
 var crawler = require("../crawler/simple_crawler");
 
@@ -20,14 +18,6 @@ router.get('/', function(request, response) {
 			response.render('index', { files : result });
 		}
 	});
-});
-
-router.post('/add-folder/', function(request, response){
-	var folder = request.body.folder;
-
-	crawler.crawlFolder(folder);
-
-	response.redirect("/");
 });
 
 module.exports = router;

@@ -16,6 +16,7 @@ var settings = require("./settings");
 
 var routes = require('./routes/index');
 var playercontrols = require('./routes/player-controls');
+var folders = require('./routes/folders');
 
 app.engine('ejs', engine);
 app.set('views', path.join(__dirname, 'views'));
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/player-controls/', playercontrols);
+app.use('/folders/', folders);
 
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
