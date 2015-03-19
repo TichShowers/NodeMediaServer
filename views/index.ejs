@@ -24,7 +24,7 @@
 				<a href="/player-controls/exit" class="btn btn-lg btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
 			</div>
 
-			<ul class="list-group">
+			<ul class="list-group" id="files">
 				<% files.forEach(function(file) { %>
 					<li class="list-group-item">
 					<a href="/player-controls/start/<%= file.id %>" class="play btn btn-sm btn-primary"><i class="glyphicon glyphicon-play"></i></a>
@@ -41,6 +41,14 @@
 						</span>
         			</div>
 			</form>
+			<ul>
+				<% folders.forEach(function(folder) { %>
+					<li class="list-group-item">
+						<a href="/folders/view/<%= folder.id %>"><%= folder.location %></a>
+						<a href="/folders/delete/<%= folder.id %>" class="remove btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i> Remove</a>
+					</li>
+				<% }) %>
+			</ul>
 		</div>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
@@ -49,7 +57,9 @@
 		<script type="text/javascript">
 			$(document).ready(function(){
 
-				$("a").on('click', linkHandler);;
+				$("#files a").on('click', linkHandler);
+				$("#controls a").on('click', linkHandler);
+				$(".remove").on('click', linkHandler);
 			});
 
 			var linkHandler = function (e) {

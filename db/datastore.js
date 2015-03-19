@@ -16,7 +16,7 @@ var addFile = function(filename, foldername, callback) {
 
 		database.run("INSERT INTO files (name, folder_id) VALUES ($file, $folderid)", {$file : filename, $folderid: id}, callback);	
 	});
-}
+};
 
 var getFilePath = function(id, callback){
 	database.all("SELECT F.name, D.location FROM files F JOIN folders D ON F.folder_id = D.id WHERE F.id = $id", { $id : id }, function(error, result) {
@@ -40,9 +40,14 @@ var deleteFolder = function(id, callback){
 	database.run("DELETE FROM folders WHERE id = $id", {$id : id}, callback);
 };
 
+var getFilesInFolders = function(id, callback) {
+	database.all('SELECT id, name FROM files WHERE folder_id = $id', {$id : id},  callback);
+}
+
 module.exports.getAllFiles = getAllFiles;
 module.exports.addFolder = addFolder;
 module.exports.addFile = addFile;
 module.exports.getFilePath = getFilePath;
 module.exports.getAllFolders = getAllFolders;
 module.exports.deleteFolder = deleteFolder;
+module.exports.getFilesInFolders = getFilesInFolders;
