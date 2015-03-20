@@ -4,7 +4,7 @@ var path = require("path");
 var datastore = require("../db/datastore");
 var settings = require("../settings");
 
-var extensions = settings.files.extensions;
+var extensions = settings.files.videos;
 
 var crawlFolder = function(folder, callback) {
 	if(path.isAbsolute(folder)) {

@@ -10,6 +10,7 @@
 		"name" : "database.db"
 	},
 	"files": {
-		"extensions": [".avi", ".mov", ".mp4", ".xvid", ".mpeg", ".3g2", ".3gp", ".asf", ".asx", ".dvdmedia", ".flv", ".m2p", ".m4v", ".mkv", ".mod", ".mpg", ".mts", ".ogm"]
+		"video": [".avi", ".mov", ".mp4", ".xvid", ".mpeg", ".3g2", ".3gp", ".asf", ".asx", ".dvdmedia", ".flv", ".m2p", ".m4v", ".mkv", ".mod", ".mpg", ".mts", ".ogm"],
+		"audio": []
 	}
 }
